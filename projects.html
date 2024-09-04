@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/jost.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+    .css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    .text-shadow,
+    .text-shadow2 {
+        text-shadow: 6px 6px 6px #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black;
+    }
+
+    .swinging {
+        animation: swing 3s infinite ease-in-out;
+    }
+
+    @keyframes swing {
+        from {
+            transform: rotate(10deg);
+        }
+
+        50% {
+            transform: rotate(-5deg);
+        }
+
+        to {
+            transform: rotate(10deg);
+        }
+    }
+
+    /* offcanvas */
+    * {
+        box-sizing: border-box;
+    }
+
+    .menu-wrap {
+        position: fixed;
+        right: 0;
+        z-index: 1001;
+        width: 300px;
+        height: 100%;
+        padding: 40px;
+        background-color: rgb(255,247,237);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+        transform: translate3d(360px, 0, 0);
+    }
+
+    .menu-wrap.active {
+        transform: translate3d(0px, 0, 0);
+    }
+
+    .menu-wrap .menu .icon-list a {
+        position: relative;
+        font-family: "Oswald", "Helvetica Neue", Helvetica, sans-serif;
+        display: block;
+        padding: 20px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #29a587;
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .menu-wrap .menu .icon-list a::before {
+        position: absolute;
+        content: "";
+        width: 0%;
+        height: 2px;
+        top: 80%;
+        transition: all 0.3s ease;
+    }
+
+    .menu-wrap .menu .icon-list a:hover {
+        color: #0f1008;
+    }
+
+    .menu-wrap .menu .icon-list a:hover::before {
+        width: 50%;
+        background-color: #0d0e08;
+    }
+
+    /* Buttons */
+    .menu-button,
+    .close-button {
+        position: fixed;
+        top: 50px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .menu-button {
+        right: 0px;
+        z-index: 102;
+        top: 12px;;
+    }
+
+    .close-button {
+        left: -50px;
+        z-index: 100;
+    }
+
+    /* Content */
+    .content {
+        text-align: center;
+        color: #282828;
+        padding-top: 80px;
+    }
+
+    .content h2 {
+        position: relative;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        font-size: 35px;
+        font-family: "Oswald", "Helvetica Neue", Helvetica, sans-serif;
+    }
+
+    .content h2::after {
+        position: absolute;
+        content: "";
+        width: 100px;
+        height: 2px;
+        background-color: #222;
+        bottom: -15px;
+        left: 50%;
+        margin-left: -50px;
+    }
+
+    .content p {
+        width: 80%;
+        margin: 10px auto;
+        line-height: 1.85;
+        color: #444;
+        font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif;
+    }
+</style>
+
+<body class="bg-orange-50 font-jost">
+    <!-- header -->
+    <header class="py-5">
+        <div class="lg:container mx-auto">
+            <div class="flex flex-wrap justify-between items-center">
+                <div class="w-[50%] flex flex-wrap">
+                    <div class="logo">
+                        <img src="images/logo2.png" alt="" class="w-[121px]">
+                    </div>
+                    <div class="ms-14">
+                        <p class="text-[#20c997] uppercase text-md font-bold font-[jost]"><span
+                                class="text-black">hello</span> my name is</p>
+                    </div>
+                </div>
+                <div class="w-[50%]">
+                    <div class="text-end">
+                        <i class="fa-regular fa-moon text-xl"></i>
+                    </div>
+                    <!-- offcanvas codepen -->
+                    <div>
+                        <div class="menu-wrap">
+                            <nav class="menu">
+                                <div class="icon-list">
+                                    <a href="projects.html"><span>Projects</span></a>
+                                    <a href="#"><span>Alerts</span></a>
+                                    <a href="#"><span>Messages</span></a>
+                                    <a href="#"><span>Comments</span></a>
+                                    <a href="#"><span>Analytics</span></a>
+                                    <a href="#"><span>Reading List</span></a>
+                                </div>
+                                <button class="close-button" id="close-button">X</button>
+                            </nav>
+                        </div>
+                        <button class="menu-button fa fa-bars" id="open-button">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- portfolio my cases -->
+    <section class="bg-orange-50 py-30">
+        <div class="lg:container mx-auto">
+            <h2 class="font-bold text-4xl text-center pb-4">PORTFOLIO</h2>
+            <h4 class="text-lg font-bold text-center pb-14">MY<span class="text-[#29a587] italic text-2xl">Cases</span>
+            </h4>
+            <div class="">
+                <div class="grid grid-cols-3 gap-8">
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Welcome to HARA, the ultimate online destination for beauty lovers! We
+                                believe that everyone deserves access to top-quality cosmetics and skincare products,
+                                and we're here to help you find them. Our mission is to democratize the beauty industry
+                                by connecting beauty enthusiasts with their favorite brands, sharing the latest beauty
+                                news, and offering expert advice on makeup, skincare, and hair.
+                                <br><br><br>
+                                From our tried-and-true best sellers to the latest and greatest product launches, we
+                                have everything you need to stay in touch with the beauty world. Whether you're a
+                                seasoned beauty junkie or just starting your journey into the world of makeup, our
+                                website offers a one-stop-shop for all your beauty needs.
+                                designed through bootsteap
+                            </p>
+                            <a href="file:///D:/3382%20MY%20ALL%20WEBSITES/bootstrap/btpr1/btpr1/index.html"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/portfolio-6.jpg" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">DC-Farm</p>
+                            <p class="pt-5">
+                                Welcome to the Organic Farming Branding website! Our website aims to provide a one-stop
+                                solution for organic farmers, branding consultants, and anyone interested in organic
+                                farming.
+
+                                Organic farming has been growing in popularity in recent years due to the increased
+                                demand for sustainable and healthy products. The benefits of organic farming extend
+                                beyond the produce itself, encompassing a more eco-friendly and socially responsible
+                                approach to agriculture.
+
+                                designed through bootstrap</p>
+                            <a href="file:///D:/3382%20MY%20ALL%20WEBSITES/bootstrap/dcfarm-20230629T112001Z-001/dcfarm/index.html"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/game-controler.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">GAME</p>
+                            <p class="pt-5">Welcome to the official website of GamerPro, the latest and most thrilling
+                                video game in the market. Our team of game developers, artists, and sound designers has
+                                created a captivating world where players can immerse themselves in an action-packed,
+                                immersive experience. With state-of-the-art graphics, cutting-edge technology, and an
+                                unforgettable soundtrack, GamerPro offers an unparalleled gaming experience that is both
+                                engaging and visually stunning.
+
+                                designed through bootstrap
+                            </p>
+                            <a href="file:///D:/3382%20MY%20ALL%20WEBSITES/bootstrap/game/game/index.html"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 pb-20 rounded-2xl overflow-hidden">
+                        <div class="text-center">
+                            <img src="images/honey-1.png" alt=""
+                                class="inline-block mx-auto rounded-2xl hover:animate-pulse">
+                        </div>
+                        <div class="relative">
+                            <p class="text-[#29a587] pt-10 font-bold">BRANDING</p>
+                            <p class="font-bold text-3xl font-serif py-4">HARA</p>
+                            <p class="pt-5">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim alias impedit
+                                rerum et officiis sit eveniet obcaecati autem, provident nemo dignissimos non beatae!
+                                Labore a facere sunt placeat quae amet!</p>
+                            <a href="#"
+                                class="group/arrow text-base font-bold inline-block pt-9 transition duration-75">See
+                                Project <i
+                                    class="fa-solid fa-arrow-right text-[#29a587] ps-5 text-lg group-hover/arrow:ps-2"></i></a>
+                            <img src="images/vector-1.png" alt="" class="absolute bottom-[-75px] h-28 right-[-60px]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="tailwind.config.js"></script>
+    <!-- offcanvas js -->
+    <script>
+        (function($) {
+  "use strict";
+  var openBtn = $("#open-button"),
+    colseBtn = $("#close-button"),
+    menu = $(".menu-wrap");
+  // Open menu when click on menu button
+  openBtn.on("click", function() {
+    menu.addClass("active");
+  });
+  // Close menu when click on Close button
+  colseBtn.on("click", function() {
+    menu.removeClass("active");
+  });
+  // Close menu when click on anywhere on the document
+  $(document).on("click", function(e) {
+    var target = $(e.target);
+    if (target.is(".menu-wrap, .menu, .icon-list, .icon-list a, .icon-list a span, #open-button") === false) {
+      menu.removeClass("active");
+      e.stopPropagation();
+    }
+  });
+})(jQuery);
+    </script>
+</body>
+
+</html>
